@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0"/>
+    <title>Knight's Travails</title>
+    <link rel="stylesheet" href="resources/css/cm-chessboard.css"/>
+    <link rel="stylesheet" href="resources/css/examples.css"/>
+</head>
+<body>
+    <h1>
+        Knight's Travails
+    </h1>
+    <div class="container">
+        <div class="board" id="board1"></div>
+        <div class="selectData">
+            <h2>Please select a starting and ending point to start</h2>
+            <div class="startingEndingPointSelection">
+                <div class="startingPoint">
+                    <h3>Select starting point</h3>
+                    <select id = "startX">
+                        <option value="" disabled selected="selected">Select X coordinate</option>
+                        <option VALUE="a">a</option>
+                        <option VALUE="b">b</option>
+                        <option VALUE="c">c</option>
+                        <option VALUE="d">d</option>
+                        <option VALUE="e">e</option>
+                        <option VALUE="f">f</option>
+                        <option VALUE="g">g</option>
+                        <option VALUE="h">h</option>
+                    </select>
+                    <select id = "startY">
+                        <option value="" disabled selected="selected">Select Y coordinate</option>
+                        <option VALUE="1">1</option>
+                        <option VALUE="2">2</option>
+                        <option VALUE="3">3</option>
+                        <option VALUE="4">4</option>
+                        <option VALUE="5">5</option>
+                        <option VALUE="6">6</option>
+                        <option VALUE="7">7</option>
+                        <option VALUE="8">8</option>
+                    </select>
+                </div>
+                <div class="endingPoint">
+                    <h3>Select ending point</h3>
+                    <select id = "endX">
+                        <option value="" disabled selected="selected">Select X coordinate</option>
+                        <option VALUE="a">a</option>
+                        <option VALUE="b">b</option>
+                        <option VALUE="c">c</option>
+                        <option VALUE="d">d</option>
+                        <option VALUE="e">e</option>
+                        <option VALUE="f">f</option>
+                        <option VALUE="g">g</option>
+                        <option VALUE="h">h</option>
+                    </select>
+                    <select id = "endY">
+                        <option value="" disabled selected="selected">Select Y coordinate</option>
+                        <option VALUE="1">1</option>
+                        <option VALUE="2">2</option>
+                        <option VALUE="3">3</option>
+                        <option VALUE="4">4</option>
+                        <option VALUE="5">5</option>
+                        <option VALUE="6">6</option>
+                        <option VALUE="7">7</option>
+                        <option VALUE="8">8</option>
+                    </select>
+                </div>
+                <div>
+                    <button onclick="window.getPaths()">Submit / Get paths</button>
+                </div>
+            </div>
+        </div>
+        <div id="paths">
+
+            <div>
+                <button id="pathSubmitButton" onclick="window.onPathSubmit()" style="display:none;">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="resources/js/paths.js"></script>
+    <script type="module">
+        import {Chessboard, BORDER_TYPE, PIECE} from "./resources/js/chessboard/Chessboard.js"
+
+        const board = new Chessboard(document.getElementById("board1"), {
+            position: "empty",
+            sprite: {url: "./resources/images/chessboard-sprite-staunty.svg"},
+            animationDuration: 1400,
+            style: {
+                borderType: BORDER_TYPE.frame
+            }
+        })
+        window.knightMove = async () => {
+            board.setPiece("e1", PIECE.wn)
+            for (var i = 1; i < 8; i++) {
+                const nextPos = i + 1
+                await board.movePiece("e"+i, "e"+nextPos)
+            }
+        }
+        // window.knightMove()
+        globals.board = board
+    </script>
+</body>
+</html>
