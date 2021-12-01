@@ -7,7 +7,8 @@ const renderPathsAsMap = (solutions) => {
     let counter = 0
     const solutionsDiv = document.getElementById('solutions')
     if (solutionsDiv) {
-        parentDiv.removeChild(solutionsDiv)
+        parentDiv.innerHTML = ""
+
     }
     for (const pathArray of solutions) {
         const newNode = document.createElement('div')
@@ -42,7 +43,11 @@ const createSelect = (counter) => {
     }
     parentDiv.appendChild(select)
     // createButton
-    document.getElementById('pathSubmitButton').style.display = 'block'
+    let btn = document.createElement("button");
+    btn.setAttribute('id', 'pathSubmitButton') 
+    btn.innerHTML = "Animate Knight";
+    btn.onclick = window.onPathSubmit
+    parentDiv.appendChild(btn);
 
 }
 
